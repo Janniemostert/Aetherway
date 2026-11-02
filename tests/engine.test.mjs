@@ -8,7 +8,8 @@ import {
   createGame, playChain, chainIsValid, findChains, flow, flowAll, blastFor, blastCells, neighbours,
   usePower, powerReady, POWERS,
 } from '../js/engine.js';
-import { LEVELS } from '../js/levels.js';
+import { BOOKS, LEVELS } from '../js/levels.js';
+import { PAR } from '../js/par.js';
 
 const rows = (n, row) => new Array(n).fill(row);
 const open = { id: 't', colors: 5, map: rows(8, 'oooooooo') };
@@ -32,6 +33,15 @@ test('every level has the shape and devices it needs', () => {
     assert.ok(text.includes('S'), `${level.id} source`);
     assert.ok(text.includes('A'), `${level.id} altar`);
   }
+});
+
+test('every book has 16 levels and every level has its own name', () => {
+  for (const book of BOOKS) assert.equal(book.levels.length, 16, book.id);
+  assert.equal(new Set(LEVELS.map((level) => level.name)).size, LEVELS.length);
+});
+
+test('every level has a generated par', () => {
+  for (const level of LEVELS) assert.ok(level.id in PAR, level.id);
 });
 
 test('every altar can be reached past iron and holes', () => {

@@ -79,7 +79,7 @@ function showScreen(id) {
 
 function isUnlocked(lv) {
   const i = LEVELS.indexOf(lv);
-  return i === 0 || !!save.stars[LEVELS[i - 1].id];
+  return i === 0 || !!save.stars[lv.id] || !!save.stars[LEVELS[i - 1].id];
 }
 
 function totalStars() {

@@ -11,7 +11,7 @@ Big Fish's *4 Elements* plays, with its own name, art and code. No assets are co
 - Boulders block energy until an explosion, bomb or spade breaks them. Iron blocks are permanent.
 - Frozen runes stay put until chained or blasted. Launchers fire beams when reached by energy or a blast.
 - Power-ups charge from clearing one colour: spade (leaf), bomb (ember), swap (droplet), shuffle (wind).
-- Four books (Earth, Water, Air, Fire) with 4 levels each. Boards are 12 x 16.
+- Four books (Earth, Water, Air, Fire) with 16 levels each, 64 in all. Boards are 12 x 16.
 - Relaxed mode scores you on moves. Timed mode adds a countdown.
 
 ## Run it

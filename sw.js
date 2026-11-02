@@ -1,5 +1,5 @@
 // Offline support. Bump VERSION whenever any file changes, or players keep the old copy.
-const VERSION = 'v3';
+const VERSION = 'v4';
 const CACHE = `aetherway-${VERSION}`;
 const ASSETS = [
   './',
