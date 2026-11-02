@@ -1,0 +1,18 @@
+{
+  "id": "./",
+  "name": "Aetherway",
+  "short_name": "Aetherway",
+  "description": "A match-three puzzle game: carry elemental energy across the board to relight four ancient books.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#141024",
+  "theme_color": "#141024",
+  "categories": ["games"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

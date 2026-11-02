@@ -1,0 +1,24 @@
+[build]
+  command = "node tools/build.mjs"
+  publish = "dist"
+
+# The browser-testing tool is only needed on a developer's PC.
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--omit=dev"
+
+# Players must always get the latest service worker and page, or updates never reach them.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"

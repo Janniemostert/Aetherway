@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Aetherway</title>
+  <meta name="description" content="A rune-chaining puzzle game: link runes, set off explosions and carve a channel for elemental energy.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#2a1a0c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Aetherway">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="title" class="screen title-screen" hidden>
+    <svg class="emblem" viewBox="0 0 200 200" aria-hidden="true">
+      <defs>
+        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#fff0a8"/><stop offset=".5" stop-color="#d49a26"/><stop offset="1" stop-color="#6e4608"/>
+        </linearGradient>
+        <radialGradient id="shine" cx=".35" cy=".28" r=".8">
+          <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/>
+          <stop offset="1" stop-color="#000" stop-opacity=".4"/>
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="96" fill="url(#gold)"/>
+      <circle cx="100" cy="100" r="86" fill="#231433"/>
+      <path d="M100 100V18A82 82 0 0 0 18 100Z" fill="#37ae2c"/>
+      <path d="M100 100V18A82 82 0 0 1 182 100Z" fill="#1f7fe8"/>
+      <path d="M100 100H18A82 82 0 0 0 100 182Z" fill="#8fd0e0"/>
+      <path d="M100 100H182A82 82 0 0 1 100 182Z" fill="#e8301f"/>
+      <circle cx="100" cy="100" r="82" fill="url(#shine)"/>
+      <circle cx="100" cy="100" r="30" fill="url(#gold)"/>
+      <circle cx="100" cy="100" r="20" fill="#ffe27a"/>
+      <circle cx="100" cy="100" r="20" fill="url(#shine)"/>
+    </svg>
+    <h1>Aetherway</h1>
+    <p class="tagline">Link the runes. Set off the blasts. Free the four elements.</p>
+    <div class="menu">
+      <button id="play" class="btn primary">Play</button>
+      <button id="mode" class="btn"></button>
+      <button id="sound" class="btn"></button>
+    </div>
+    <aside id="install" class="install" hidden>
+      <p>To play full screen and offline, tap <strong>Share</strong>, then <strong>Add to Home Screen</strong>.</p>
+      <button id="install-close" class="link-btn">Dismiss</button>
+    </aside>
+  </main>
+
+  <main id="map" class="screen map-screen" hidden>
+    <header class="bar">
+      <button id="map-back" class="btn small">Back</button>
+      <span id="total-stars" class="total-stars"></span>
+    </header>
+    <div id="books" class="books"></div>
+  </main>
+
+  <main id="game" class="screen game-screen" hidden>
+    <div class="hud-top">
+      <button id="pause" class="pill" aria-label="Pause">Menu</button>
+      <div class="level-title">
+        <small id="level-book"></small>
+        <strong id="level-name"></strong>
+      </div>
+      <div class="stat">
+        <small id="counter-label">Moves</small>
+        <strong id="counter">0</strong>
+        <small id="par" class="par"></small>
+      </div>
+      <div class="stat">
+        <small>Score</small>
+        <strong id="score">0</strong>
+      </div>
+    </div>
+    <div id="board-wrap" class="board-wrap">
+      <canvas id="board" aria-label="Game board. Drag through touching runes of one colour."></canvas>
+    </div>
+    <div class="hud-bottom">
+      <p id="status" class="status" role="status"></p>
+      <div class="powers">
+        <button id="power-spade" class="power" data-power="spade" aria-label="Spade power-up">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c5 5 7 9 7 13s-3 6-7 6-7-2-7-6 2-8 7-13z" fill="#dfe6ee"/><rect x="14.5" y="20" width="3" height="9" rx="1" fill="#a06a2c"/></svg>
+        </button>
+        <button id="power-bomb" class="power" data-power="bomb" aria-label="Bomb power-up">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="14" cy="19" r="10" fill="#2a2730"/><circle cx="11" cy="15" r="2.5" fill="#8b8794"/><path d="M20 11l4-4" stroke="#a06a2c" stroke-width="2.5" stroke-linecap="round"/><circle cx="25.5" cy="5.5" r="3" fill="#ffb238"/></svg>
+        </button>
+        <button id="power-swap" class="power" data-power="swap" aria-label="Swap power-up">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 11h17l-5-5M27 21H10l5 5" fill="none" stroke="#bfe6ff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="power-shuffle" class="power" data-power="shuffle" aria-label="Shuffle power-up">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M26 16a10 10 0 1 1-3-7M23 3v6h-6" fill="none" stroke="#fff0a8" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <div class="rotate-tip" role="status">Turn your phone upright to play. The board needs the height.</div>
+
+  <div id="overlay" class="overlay" hidden>
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+      <h2 id="overlay-title"></h2>
+      <div id="overlay-stars" class="stars" role="img" hidden></div>
+      <p id="overlay-body"></p>
+      <div id="overlay-actions" class="dialog-actions"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>

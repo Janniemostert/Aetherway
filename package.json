@@ -1,0 +1,1 @@
+{"name":"aetherway","private":true,"type":"module","scripts":{"test":"node --test tests/","balance":"node tools/balance.mjs"},"devDependencies":{"playwright":"^1.64.1"}}
